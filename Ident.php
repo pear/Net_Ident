@@ -66,7 +66,7 @@ define('NET_IDENT_STATUS_ERROR',          2);
  *
  * @author      Ondrej Jombik <nepto@platon.sk>
  * @package     Net_Ident
- * @version     1.1
+ * @version     1.1.0
  * @access      public
  */
 class Net_Ident
