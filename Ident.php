@@ -312,20 +312,18 @@ class Net_Ident
      */
     function _parseIdentResponse($string)
     {
-        @list(, $response)           = explode(':', $string, 2);
-        @list($resp_type, $add_info) = explode(':', trim($response), 2);
-        if (trim($resp_type) == 'USERID') {
-            @list($os_type, $username) = explode(':', trim($add_info), 2);
-            $this->_data['username']   = trim($username);
-            $this->_data['os_type']    = trim($os_type);
+        $this->_data['username'] = false;
+        $this->_data['os_type']  = false;
+        $array = explode(':', $string, 4);
+        if (count($array) > 1 && ! strcasecmp(trim($array[1]), 'USERID')) {
+            isset($array[2]) && $this->_data['os_type']  = trim($array[2]);
+            isset($array[3]) && $this->_data['username'] = trim($array[3]);
             return true;
-        } elseif (trim($resp_type) == 'ERROR') {
-            $this->_error = trim($add_info);
+        } elseif (count($array) > 1 && ! strcasecmp(trim($array[1]), 'ERROR')) {
+            isset($array[2]) && $this->_error = trim($array[2]);
         } else {
             $this->_error = 'Invalid ident server response';
         }
-        $this->_data['username'] = false;
-        $this->_data['os_type']  = false;
         return false;
     }
 }
