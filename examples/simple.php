@@ -2,8 +2,7 @@
 
 	// $Id$
 
-	// TODO: change to require_once 'Net/Ident.php';
-	require_once '../../Net_Ident/Ident.php';
+	require_once 'Net/Ident.php';
 	$ident   = new Net_Ident;
 	$user    = $ident->getUser();
 	$os_type = $ident->getOsType();

@@ -10,8 +10,7 @@
    user(), getOsType(), and identError()
  */
 
-// TODO: change to require_once 'Net/Ident.php';
-require_once '../../Net_Ident/Ident.php';
+require_once 'Net/Ident.php';
 
 // some users will be going through a proxy - this attempts to work out their
 // real IP address:
