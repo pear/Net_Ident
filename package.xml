@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- $Id: package.xml,v 1.1 2002-10-03 20:40:42 nepto Exp $ -->
+<package version="1.0">
+	<name>Net_Ident</name>
+	<summary>Identification Protocol implementation</summary>
+	<description>
+		The PEAR::Net_Ident implements Identification Protocol according to RFC
+		1413.
+
+		The Identification Protocol (a.k.a., "ident", a.k.a., "the Ident
+		Protocol") provides a means to determine the identity of a user of a
+		particular TCP connection.  Given a TCP port number pair, it returns a
+		character string which identifies the owner of that connection on the
+		server's system.
+	</description>
+	<license>PHP</license>
+	<maintainers>
+		<maintainer>
+			<user>nepto</user>
+			<role>lead</role>
+			<name>Ondrej Jombik</name>
+			<email>nepto@pobox.sk</email>
+		</maintainer>
+	</maintainers>
+	<release>
+		<version>1.0</version>
+		<date>2002-10-01</date>
+		<state>stable</state>
+		<notes>
+			This is the initial independent release of the Net_Ident package.
+		</notes>
+		<filelist>
+			<dir name="/" baseinstalldir="Net">
+				<file role="php">Ident.php</file>
+			</dir>
+		</filelist>
+	</release>
+</package>
+
