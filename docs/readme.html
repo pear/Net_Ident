@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+	<head>
+		<title>Net_Ident - PHP Ident Client Class</title>
+	</head>
+	<body>
+
+		<h1>NAME</h1>
+		<p>Net_Ident - PHP Ident Client Class</p>
+		<hr>
+
+		<h1><a name="SYNOPSIS">SYNOPSIS</a></h1>
+<pre>&lt;?php
+
+	require_once 'Net/Ident.php';
+	$ident   = new Net_Ident;
+	$user    = $ident-&gt;getUser();
+	$os_type = $ident-&gt;getOsType();
+	echo "user: $user, operating system: $os_type\n";
+
+?&gt;
+</pre>
+		<hr>
+
+		<h1><a name="OVERVIEW">OVERVIEW</a></h1>
+		
+		<p><tt>Net_Ident</tt> is an RFC 1413 compatible PHP4 Ident client
+		class. The Identification Protocol (a.k.a., "ident", a.k.a., "the Ident
+		Protocol") provides a means to determine the identity of a user of a
+		particular TCP connection.  Given a TCP port number pair, it returns a
+		character string which identifies the owner of that connection on the
+		server's system.</p>
+		
+		<hr>
+
+		<h1><a name="CONSTRUCTOR">CONSTRUCTOR</a></h1>
+		<blockquote><tt>$ident = Net_Ident($remote_addr, $remote_port,
+				$local_port, $ident_port, $timeout)</tt></blockquote>
+		
+		<p>The constructor of this class accepts five optional arguments.
+		<tt>$remote_addr</tt> is the IP address or DNS hostname of the remote
+		computer running the ident server. <tt>$remote_port</tt> is the port
+		number the remote computer is using to make a connection to the local
+		machine. PHP can access the remote port for a given HTTP connection
+		using the <tt>REMOTE_PORT</tt> environment variable.
+		<tt>$local_port</tt> is the local port being connected to. Regular HTTP
+		connections will be on port 80, HTTPS connections on port 443. A more
+		robust solution would be to use the <tt>SERVER_PORT</tt> environment
+		variable to specify this port. You can specify also
+		<tt>$ident_port</tt> parameter, port where ident server of client
+		machine is listening and also socket timeout using <tt>$timeout</tt>
+		parameter.</p>
+
+		<p>There is no need to pass these variables into constructor. They will
+		be initialized by default, if not present. See example above.</p>
+
+		<p>TCP connection to the remote ident server will be established oly if
+		it will be really needed. After this, also ident query will be made.
+		The result of this query can be fetched using methods
+		<tt>getUser()</tt> and <tt>getOsType()</tt>.</p>
+		
+		<hr>
+
+		<h1><a name="METHODS">METHODS</a></h1>
+		<blockquote><tt>$ident-&gt;query();</tt></blockquote>
+		<p>Performs ident network query. This is done automatically when
+		object is requested for returning particular user or operating system
+		data. You can force query performing with this method, so it is
+		possible to make more requests with only one Net_Ident object. Returns
+		PEAR_Error on connection error or rawdata read from socket on
+		success.</p>
+
+		<blockquote><tt>$ident-&gt;identError();</tt></blockquote>
+		<p>Returns a string containing the last error message returned by the
+		remote ident server.</p>
+
+		<blockquote><tt>$ident-&gt;getUser();</tt></blockquote>
+		<p>Returns a string containing the <tt>USERID</tt> returned by the
+		remote ident server. This will return false if there was an error with
+		the query.</p>
+
+		<blockquote><tt>$ident-&gt;getOsType();</tt></blockquote>
+		<p>Returns a string containing the operating system type of the remote
+		host, as returned by the remote ident server. Permitted values may be
+		an ASCII string or a numerical code compliant with RFC 1340, "Assigned
+		Numbers".</p>
+
+		<hr>
+
+		<h1><a name="DISCLAIMER">DISCLAIMER</a></h1>
+		<p>I make NO WARRANTY or representation, either express or implied,
+		with respect to this software, its quality, accuracy, merchantability,
+		or fitness for a particular purpose. This software is provided "AS IS",
+		and you, its user, assume the entire risk as to its quality and
+		accuracy.</p>
+
+		<hr>
+
+		<h1><a name="AUTHOR">AUTHOR and LICENSE</a></h1>
+
+		<p>Original version of Net_Ident was created by Gavin Brown &lt;<a
+			href="mailto:gavin.brown@uk.com">gavin.brown@uk.com</a>&gt;. Code
+		pearification and various improvements was done by Ondrej Jombik &lt;<a
+			href="mailto:nepto@pobox.sk">nepto@pobox.sk</a>&gt;.</p>
+
+		<p>This PHP class is released under the PHP License.</p>
+
+		<hr>
+
+		<h1><a name="SEE_ALSO">SEE ALSO</a></h1>
+		<p><a href="http://www.ietf.org/rfc/rfc1413.txt">RFC1413</a>, <a
+			href="http://www.ietf.org/rfc/rfc1340.txt">RFC1340</a>.</p>
+
+		<hr>
+
+	</body>
+</html>
+
