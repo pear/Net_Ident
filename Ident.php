@@ -246,7 +246,7 @@ class Net_Ident
 
         $this->_status = NET_IDENT_STATUS_OK;
         $this->_data['rawdata'] = $line;
-        $this->_parseIdentReponse($line);
+        $this->_parseIdentResponse($line);
 
         return $line;
     }
@@ -310,7 +310,7 @@ class Net_Ident
      *                  false otherwise
      * @access  private
      */
-    function _parseIdentReponse($string)
+    function _parseIdentResponse($string)
     {
         @list(, $response)           = explode(':', $string, 2);
         @list($resp_type, $add_info) = explode(':', trim($response), 2);
