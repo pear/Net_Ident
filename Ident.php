@@ -312,12 +312,12 @@ class Net_Ident
      */
     function _parseIdentReponse($string)
     {
-        list(, $response)           = explode(':', $string, 2);
-        list($resp_type, $add_info) = explode(':', trim($response), 2);
+        @list(, $response)           = explode(':', $string, 2);
+        @list($resp_type, $add_info) = explode(':', trim($response), 2);
         if (trim($resp_type) == 'USERID') {
-            list($os_type, $username) = explode(':', trim($add_info), 2);
-            $this->_data['username']  = trim($username);
-            $this->_data['os_type']   = trim($os_type);
+            @list($os_type, $username) = explode(':', trim($add_info), 2);
+            $this->_data['username']   = trim($username);
+            $this->_data['os_type']    = trim($os_type);
             return true;
         } elseif (trim($resp_type) == 'ERROR') {
             $this->_error = trim($add_info);
